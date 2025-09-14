@@ -1,0 +1,83 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Data
+data/raw/
+data/processed/
+*.json
+*.jsonl
+*.tsv
+*.csv
+!requirements.txt
+
+# Models
+models/
+*.pt
+*.pth
+*.safetensors
+*.bin
+
+# Checkpoints
+checkpoints/
+*.ckpt
+
+# Outputs
+outputs/
+*.log
+
+# ColBERT
+colbertv2.0/
+*.index
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+!notebooks/*.ipynb
+
+# Environment
+.env
+.env.local
+
+# OS
+.DS_Store
+Thumbs.db
+
+
+CHANGELOG_GPT_FINETUNING.md
+COMPLETION_STATUS.md
+FINAL_SUMMARY.md
+SUMMARY.md
+PIPELINE.md
+QUICKSTART.md
+SETUP.md
