@@ -150,7 +150,7 @@ def build_prompt_inst(ex: dict, tokenizer, max_len: int, headroom: int) -> str:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--base", default=os.path.expanduser("~/models/CodeLlama-34b-Instruct-hf"))
+    ap.add_argument("--base", default=os.getenv("CODELLAMA_MODEL_PATH", "codellama/CodeLlama-34b-Instruct-hf"))
     ap.add_argument("--adapters", default=os.path.expanduser("codellama-34b-instruct-vquanda-finetuned"))
     ap.add_argument("--test", required=True, help="Path to test JSON (list of {question, retrieved_triples...})")
     ap.add_argument("--out", required=True, help="Output JSONL path")

@@ -14,7 +14,8 @@ from peft import LoraConfig, prepare_model_for_kbit_training, get_peft_model
 torch.cuda.empty_cache()
 torch.backends.cuda.matmul.allow_tf32 = True  # speedup on Ampere+
 
-MODEL_NAME = os.path.expanduser("~/models/CodeLlama-34b-Instruct-hf")  # <- exact local path
+# Use Hugging Face model ID - will auto-download if not cached
+MODEL_NAME = os.getenv("CODELLAMA_MODEL_PATH", "codellama/CodeLlama-34b-Instruct-hf")
 USE_FAST_TOKENIZER = False
 LORA_TARGETS = ["q_proj","k_proj","v_proj","o_proj","gate_proj","up_proj","down_proj"]  # <- exact modules
 LOAD_IN_4BIT = True

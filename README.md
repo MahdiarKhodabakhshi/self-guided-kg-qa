@@ -1,6 +1,6 @@
-# SPARQL Generation Pipeline
+# Self-Guided Few-Shot Refinement for Knowledge Graph Question Answering
 
-A comprehensive, structured pipeline for generating SPARQL queries from natural language questions using dual-stage retrieval, ColBERT ranking, model finetuning, and dynamic few-shot learning with Chain of Thought reasoning.
+A self-guided framework for knowledge-graph question answering that maps natural-language questions (NLQ) to executable SPARQL. The pipeline retrieves and ranks grounding triples, generates an initial “hypothesis” query, and then refines it via Hybrid Example Search (HES), dynamic few-shot selection that combines semantic similarity (question) and structural similarity (SPARQL pattern), optionally augmented with concise chain-of-thought rationales to guide controlled revision. The repository includes modular components for preprocessing, entity linking, triple retrieval, ColBERT ranking, model fine-tuning/inference, and evaluation on standard KGQA benchmarks (QALD-9, LC-QuAD-1, VQuAnDa) over DBpedia endpoints.
 
 ## Table of Contents
 
@@ -57,7 +57,30 @@ sparql_generation_pipeline/
 
 ## Installation
 
-### Basic Installation
+### Quick Setup (Recommended)
+
+The repository includes an automated setup script that downloads all necessary datasets and verifies model access:
+
+```bash
+# Clone the repository
+git clone git@github.com:MahdiarKhodabakhshi/self-guided-kg-qa.git
+cd self-guided-kg-qa
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run setup script to download datasets and verify models
+python scripts/setup.py --datasets all --splits train test --models all
+```
+
+This will:
+- Download QALD-9+, LC-QuAD, and VQuanda datasets (train and test splits)
+- Verify access to all Hugging Face models (they'll auto-download when first used)
+- Create necessary directory structure
+
+### Manual Installation
+
+If you prefer manual setup:
 
 ```bash
 # Clone or navigate to the repository
@@ -68,6 +91,27 @@ pip install -r requirements.txt
 
 # Install ColBERT (if not already installed)
 pip install colbert-ai
+
+# Manually download datasets to data/raw/ directory
+# - QALD-9+: https://github.com/ag-sc/QALD
+# - LC-QuAD: https://github.com/AskNowQA/LC-QuAD2.0
+# - VQuanda: https://github.com/AskNowQA/VQuanda
+```
+
+### Setup Script Options
+
+```bash
+# Download only QALD dataset
+python scripts/setup.py --datasets qald
+
+# Download specific datasets
+python scripts/setup.py --datasets qald lcquad --splits train
+
+# Verify only specific models
+python scripts/setup.py --skip-datasets --models mistral mixtral
+
+# Skip model verification (models will download automatically when used)
+python scripts/setup.py --datasets all --skip-models
 ```
 
 ### Prerequisites
@@ -78,6 +122,23 @@ pip install colbert-ai
 - Access to SPARQL endpoints (DBpedia, Wikidata)
 
 ## Quick Start
+
+### Initial Setup
+
+First, run the setup script to download all necessary resources:
+
+```bash
+# Download all datasets (QALD, LC-QuAD, VQuanda) for train and test splits
+python scripts/setup.py --datasets all --splits train test
+
+# Or download only specific datasets
+python scripts/setup.py --datasets qald --splits train test
+```
+
+This will:
+- Download datasets to `data/raw/` directory
+- Verify Hugging Face model access (models auto-download when first used)
+- Create necessary directory structure
 
 ### 1. Preprocessing
 
