@@ -635,7 +635,7 @@ The pipeline generates the following output files:
 9. `outputs/{dataset}_{split}_cot.json` - Data with CoT
 10. `outputs/{dataset}_{split}_final.json` - Final SPARQL predictions
 
-## Citation
+<!-- ## Citation
 
 If you use this code in your research, please cite:
 
@@ -650,4 +650,4 @@ If you use this code in your research, please cite:
 
 ## License
 
-[Specify your license]
+[Specify your license] -->
